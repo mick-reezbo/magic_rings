@@ -1,0 +1,329 @@
+#:kivy 1.0.9
+#:import win kivy.core.window
+#:import m math
+#:set hb m.sin(m.radians(9))
+#:set thb m.cos(m.radians(45))
+
+<RedBall>:
+
+    size: self.parent.parent.width / 13, self.parent.parent.width / 13
+
+    canvas:
+        Color:
+            rgb: 1, 0, 0
+        Ellipse:
+            size: self.size
+            pos: self.pos
+
+<BlackBall>:
+
+    size: self.parent.parent.width / 13, self.parent.parent.width / 13
+
+    canvas:
+        Color:
+            rgb:0, 0, 0
+        Ellipse:
+            size: self.size
+            pos: self.pos
+
+<CyanBall>:
+
+    size: self.parent.parent.width / 13, self.parent.parent.width / 13
+
+    canvas:
+        Color:
+            rgb: 0, 1, 1
+        Ellipse:
+            size: self.size
+            pos: self.pos
+
+<YellowBall>:
+
+    size: self.parent.parent.width / 13, self.parent.parent.width / 13
+
+    canvas:
+        Color:
+            rgb: 1, 1, 0
+        Ellipse:
+            size: self.size
+            pos: self.pos
+
+<RingsBoard>:
+
+    size: self.parent.size
+
+    canvas:
+        Color:
+            rgb: 1, 1, 0.8
+        RoundedRectangle:
+            size: ((self.width / 26 / hb + self.width / 13) * 2) + (self.width / 13 / hb * thb), ((self.width / 26 / hb) + (self.width / 13)) * 2
+            pos: self.center_x - (self.width / 26 / hb * thb) - (self.width / 26 / hb) - (self.width / 13), self.center_y - (self.width / 26 / hb) - (self.width / 13)
+            radius: [self.width / 26 / hb + self.width / 13]
+        Color:
+            rgb: 0.8, 0.8, 0.6
+        Line:
+            circle: self.center_x - (self.width / 26 / hb * thb), self.center_y, self.parent.width / 26 / hb
+            width: self.parent.width / 26
+        Line:
+            circle: self.center_x + (self.width /26 / hb * thb), self.center_y, self.parent.width / 26 / hb
+            width: self.parent.width / 26
+
+<Ring>:
+
+    size: self.parent.width / 26 / hb + self.parent.width / 13, self.parent.width / 26 / hb + self.parent.width / 13
+
+<RingsGame>:
+
+    rb1: red_ball_1
+    rb2: red_ball_2
+    rb3: red_ball_3
+    rb4: red_ball_4
+    rb5: red_ball_5
+    rb6: red_ball_6
+    rb7: red_ball_7
+    rb8: red_ball_8
+    rb9: red_ball_9
+    rb10: red_ball_10
+    bb1: black_ball_1
+    bb2: black_ball_2
+    bb3: black_ball_3
+    bb4: black_ball_4
+    bb5: black_ball_5
+    bb6: black_ball_6
+    bb7: black_ball_7
+    bb8: black_ball_8
+    bb9: black_ball_9
+    bb10: black_ball_10
+    cb1: cyan_ball_1
+    cb2: cyan_ball_2
+    cb3: cyan_ball_3
+    cb4: cyan_ball_4
+    cb5: cyan_ball_5
+    cb6: cyan_ball_6
+    cb7: cyan_ball_7
+    cb8: cyan_ball_8
+    cb9: cyan_ball_9
+    yb1: yellow_ball_1
+    yb2: yellow_ball_2
+    yb3: yellow_ball_3
+    yb4: yellow_ball_4
+    yb5: yellow_ball_5
+    yb6: yellow_ball_6
+    yb7: yellow_ball_7
+    yb8: yellow_ball_8
+    yb9: yellow_ball_9
+
+    size_hint: 0.8, 0.8
+    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+    RingsBoard:
+        id: board
+        center: self.parent.center
+
+        Ring:
+            id: left_ring
+            center_x: board.center_x - (board.width / 26 / hb * thb)
+            center_y: board.center_y
+
+            BlackBall:
+                id: black_ball_1
+                center_x: left_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(45)))
+                center_y: left_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(45)))
+
+            BlackBall:
+                id: black_ball_2
+                center_x: left_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(27)))
+                center_y: left_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(27)))
+
+            BlackBall:
+                id: black_ball_3
+                center_x: left_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(9)))
+                center_y: left_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(9)))
+
+            BlackBall:
+                id: black_ball_4
+                center_x: left_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(9)))
+                center_y: left_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(9)))
+
+            BlackBall:
+                id: black_ball_5
+                center_x: left_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(27)))
+                center_y: left_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(27)))
+
+            BlackBall:
+                id: black_ball_6
+                center_x: left_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(45)))
+                center_y: left_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(45)))
+
+            BlackBall:
+                id: black_ball_7
+                center_x: left_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(63)))
+                center_y: left_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(63)))
+
+            BlackBall:
+                id: black_ball_8
+                center_x: left_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(81)))
+                center_y: left_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(81)))
+
+            BlackBall:
+                id: black_ball_9
+                center_x: left_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(81)))
+                center_y: left_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(81)))
+
+            BlackBall:
+                id: black_ball_10
+                center_x: left_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(63)))
+                center_y: left_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(63)))
+
+            YellowBall:
+                id: yellow_ball_1
+                center_x: left_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(27)))
+                center_y: left_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(27)))
+
+            YellowBall:
+                id: yellow_ball_2
+                center_x: left_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(9)))
+                center_y: left_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(9)))
+
+            YellowBall:
+                id: yellow_ball_3
+                center_x: left_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(9)))
+                center_y: left_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(9)))
+
+            YellowBall:
+                id: yellow_ball_4
+                center_x: left_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(27)))
+                center_y: left_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(27)))
+
+            YellowBall:
+                id: yellow_ball_5
+                center_x: left_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(45)))
+                center_y: left_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(45)))
+
+            YellowBall:
+                id: yellow_ball_6
+                center_x: left_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(63)))
+                center_y: left_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(63)))
+
+            YellowBall:
+                id: yellow_ball_7
+                center_x: left_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(81)))
+                center_y: left_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(81)))
+
+            YellowBall:
+                id: yellow_ball_8
+                center_x: left_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(81)))
+                center_y: left_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(81)))
+
+            YellowBall:
+                id: yellow_ball_9
+                center_x: left_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(63)))
+                center_y: left_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(63)))
+
+        Ring:
+            id: right_ring
+            center_x: board.center_x + (board.width / 26 / hb * thb)
+            center_y: board.center_y
+
+            RedBall:
+                id: red_ball_1
+                center_x: right_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(45)))
+                center_y: right_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(45)))
+
+            RedBall:
+                id: red_ball_2
+                center_x: right_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(27)))
+                center_y: right_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(27)))
+
+            RedBall:
+                id: red_ball_3
+                center_x: right_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(9)))
+                center_y: right_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(9)))
+
+            RedBall:
+                id: red_ball_4
+                center_x: right_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(9)))
+                center_y: right_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(9)))
+
+            RedBall:
+                id: red_ball_5
+                center_x: right_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(27)))
+                center_y: right_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(27)))
+
+            RedBall:
+                id: red_ball_6
+                center_x: right_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(45)))
+                center_y: right_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(45)))
+
+            RedBall:
+                id: red_ball_7
+                center_x: right_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(63)))
+                center_y: right_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(63)))
+
+            RedBall:
+                id: red_ball_8
+                center_x: right_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(81)))
+                center_y: right_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(81)))
+
+            RedBall:
+                id: red_ball_9
+                center_x: right_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(81)))
+                center_y: right_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(81)))
+
+            RedBall:
+                id: red_ball_10
+                center_x: right_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(63)))
+                center_y: right_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(63)))
+
+
+            CyanBall:
+                id: cyan_ball_1
+                center_x: right_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(27)))
+                center_y: right_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(27)))
+
+            CyanBall:
+                id: cyan_ball_2
+                center_x: right_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(9)))
+                center_y: right_ring.center_y - (board.width / 26 / hb * m.sin(m.radians(9)))
+
+            CyanBall:
+                id: cyan_ball_3
+                center_x: right_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(9)))
+                center_y: right_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(9)))
+
+            CyanBall:
+                id: cyan_ball_4
+                center_x: right_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(27)))
+                center_y: right_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(27)))
+
+            CyanBall:
+                id: cyan_ball_5
+                center_x: right_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(45)))
+                center_y: right_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(45)))
+
+            CyanBall:
+                id: cyan_ball_6
+                center_x: right_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(63)))
+                center_y: right_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(63)))
+
+            CyanBall:
+                id: cyan_ball_7
+                center_x: right_ring.center_x - (board.width / 26 / hb * m.cos(m.radians(81)))
+                center_y: right_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(81)))
+
+            CyanBall:
+                id: cyan_ball_8
+                center_x: right_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(81)))
+                center_y: right_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(81)))
+
+            CyanBall:
+                id: cyan_ball_9
+                center_x: right_ring.center_x + (board.width / 26 / hb * m.cos(m.radians(63)))
+                center_y: right_ring.center_y + (board.width / 26 / hb * m.sin(m.radians(63)))
+
+
+
+
+
+
+
